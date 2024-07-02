@@ -23,6 +23,21 @@ public class EnrollmentDao()
             .FirstOrDefaultAsync(e => e.EnrollmentId == id);
     }
     
+    public async Task<IEnumerable<Enrollment>> GetByStudentId(int studentId)
+    {
+        return await _context.Enrollments
+            .Include(e => e.Class)
+            .Where(e => e.StudentId == studentId)
+            .ToListAsync();
+    }
+    
+    public async Task<IEnumerable<Enrollment>> GetByClassId(int classId)
+    {
+        return await _context.Enrollments
+            .Include(e => e.Student)
+            .Where(e => e.ClassId == classId)
+            .ToListAsync();
+    }
     public async Task<int> AddEnrollmentAsync(Enrollment enrollment)
     {
         _context.Enrollments.Add(enrollment);

@@ -1,32 +1,35 @@
 ﻿using BusinessObjects.Entities;
+using Repositories.Implementation;
+using Repositories.Interface;
 using Services.Interface;
 
 namespace Services.Implementation;
 
-public class AssignmentService : IAssignmentService
+public class AssignmentService(IAssignmentRepository assignmentRepository) : IAssignmentService
 {
-    public Task<IEnumerable<Assignment>> GetAllAssignmentsAsync()
+    public IAssignmentRepository AssignmentRepository { get; set; } = assignmentRepository;
+    public async Task<IEnumerable<Assignment?>?> GetAllAssignmentsAsync()
     {
-        throw new NotImplementedException();
+        return await AssignmentRepository.GetAll();
     }
 
-    public Task<Assignment?> GetAssignmentByIdAsync(int id)
+    public async Task<Assignment?> GetAssignmentByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return await AssignmentRepository.GetById(id);
     }
 
-    public Task<int> AddAssignmentAsync(Assignment assignment)
+    public async Task<int> AddAssignmentAsync(Assignment assignment)
     {
-        throw new NotImplementedException();
+        return await AssignmentRepository.Create(assignment);
     }
 
-    public Task<int> UpdateAssignmentAsync(int id, Assignment assignment)
+    public async Task<int> UpdateAssignmentAsync(int id, Assignment assignment)
     {
-        throw new NotImplementedException();
+        return await AssignmentRepository.Update(id, assignment);
     }
 
-    public Task<int> DeleteAssignmentAsync(int id)
+    public async Task<int> DeleteAssignmentAsync(int id)
     {
-        throw new NotImplementedException();
+        return await AssignmentRepository.Delete(id);
     }
 }

@@ -31,4 +31,13 @@ public class EnrollmentRepository(EnrollmentDao enrollmentDao) : IEnrollmentRepo
     {
         return await EnrollmentDao.GetEnrollmentByIdAsync(id);
     }
+
+    public async Task<IEnumerable<Enrollment>> GetByStudentId(int studentId)
+    {
+        return await EnrollmentDao.GetByStudentId(studentId);
+    }
+    public async Task<IEnumerable<Enrollment>> GetByClassId(int classId)
+    {
+        return await EnrollmentDao.GetByClassId(classId);
+    }
 }

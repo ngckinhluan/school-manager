@@ -1,42 +1,45 @@
 ﻿using BusinessObjects.Entities;
+using Repositories.Interface;
 using Services.Interface;
 
 namespace Services.Implementation;
 
-public class EnrollmentService : IEnrollmentService
+public class EnrollmentService(IEnrollmentRepository enrollmentRepository) : IEnrollmentService
 {
-    public Task<IEnumerable<Enrollment>> GetAllEnrollmentsAsync()
+    public IEnrollmentRepository EnrollmentRepository { get; set; } = enrollmentRepository;
+
+    public async Task<IEnumerable<Enrollment?>?> GetAllEnrollmentsAsync()
     {
-        throw new NotImplementedException();
+        return await EnrollmentRepository.GetAll();
     }
 
-    public Task<Enrollment?> GetEnrollmentByIdAsync(int id)
+    public async Task<Enrollment?> GetEnrollmentByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return await EnrollmentRepository.GetById(id);
     }
 
-    public Task<IEnumerable<Enrollment>> GetEnrollmentsByStudentIdAsync(int studentId)
+    public async Task<IEnumerable<Enrollment>> GetEnrollmentsByStudentIdAsync(int studentId)
     {
-        throw new NotImplementedException();
+        return await EnrollmentRepository.GetByStudentId(studentId);
     }
 
-    public Task<IEnumerable<Enrollment>> GetEnrollmentsByClassIdAsync(int classId)
+    public async Task<IEnumerable<Enrollment>> GetEnrollmentsByClassIdAsync(int classId)
     {
-        throw new NotImplementedException();
+        return await EnrollmentRepository.GetByClassId(classId);
     }
 
-    public Task<int> AddEnrollmentAsync(Enrollment enrollment)
+    public async Task<int> AddEnrollmentAsync(Enrollment enrollment)
     {
-        throw new NotImplementedException();
+        return await EnrollmentRepository.Create(enrollment);
     }
 
-    public Task<int> UpdateEnrollmentAsync(int id, Enrollment enrollment)
+    public async Task<int> UpdateEnrollmentAsync(int id, Enrollment enrollment)
     {
-        throw new NotImplementedException();
+        return await EnrollmentRepository.Update(id, enrollment);
     }
 
-    public Task<int> DeleteEnrollmentAsync(int id)
+    public async Task<int> DeleteEnrollmentAsync(int id)
     {
-        throw new NotImplementedException();
+        return await EnrollmentRepository.Delete(id);
     }
 }

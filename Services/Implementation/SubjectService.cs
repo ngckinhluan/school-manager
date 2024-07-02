@@ -1,32 +1,34 @@
 ﻿using BusinessObjects.Entities;
+using Repositories.Interface;
 using Services.Interface;
 
 namespace Services.Implementation;
 
-public class SubjectService : ISubjectService
+public class SubjectService(ISubjectRepository subjectRepository) : ISubjectService
 {
-    public Task<IEnumerable<Subject>> GetAllSubjectsAsync()
+    public ISubjectRepository SubjectRepository { get; set; } = subjectRepository;
+    public async Task<IEnumerable<Subject?>?> GetAllSubjectsAsync()
     {
-        throw new NotImplementedException();
+        return await SubjectRepository.GetAll();
     }
 
-    public Task<Subject?> GetSubjectByIdAsync(int id)
+    public async Task<Subject?> GetSubjectByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return await SubjectRepository.GetById(id);
     }
 
-    public Task<int> CreateSubjectAsync(Subject subject)
+    public async Task<int> CreateSubjectAsync(Subject subject)
     {
-        throw new NotImplementedException();
+        return await SubjectRepository.Create(subject);
     }
 
-    public Task<int> UpdateSubjectAsync(int id, Subject subject)
+    public async Task<int> UpdateSubjectAsync(int id, Subject subject)
     {
-        throw new NotImplementedException();
+        return await SubjectRepository.Update(id, subject);
     }
 
-    public Task<int> DeleteSubjectAsync(int id)
+    public async Task<int> DeleteSubjectAsync(int id)
     {
-        throw new NotImplementedException();
+        return await SubjectRepository.Delete(id);
     }
 }

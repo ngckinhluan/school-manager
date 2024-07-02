@@ -1,32 +1,35 @@
 ﻿using BusinessObjects.Entities;
+using Repositories.Implementation;
+using Repositories.Interface;
 using Services.Interface;
 
 namespace Services.Implementation;
 
-public class GradeService : IGradeService
+public class GradeService(IGradeRepository gradeRepository) : IGradeService
 {
-    public Task<IEnumerable<Grade>> GetAllGradesAsync()
+    public IGradeRepository GradeRepository { get; set; } = gradeRepository;
+    public async Task<IEnumerable<Grade?>?> GetAllGradesAsync()
     {
-        throw new NotImplementedException();
+       return await GradeRepository.GetAll();
     }
 
-    public Task<Grade?> GetGradeByIdAsync(int id)
+    public async Task<Grade?> GetGradeByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return await GradeRepository.GetById(id);
     }
 
-    public Task<int> CreateGradeAsync(Grade grade)
+    public async Task<int> CreateGradeAsync(Grade grade)
     {
-        throw new NotImplementedException();
+        return await GradeRepository.Create(grade);
     }
 
-    public Task<int> UpdateGradeAsync(int id, Grade grade)
+    public async Task<int> UpdateGradeAsync(int id, Grade grade)
     {
-        throw new NotImplementedException();
+        return await GradeRepository.Update(id, grade);
     }
 
-    public Task<int> DeleteGradeAsync(int id)
+    public async Task<int> DeleteGradeAsync(int id)
     {
-        throw new NotImplementedException();
+        return await GradeRepository.Delete(id);
     }
 }

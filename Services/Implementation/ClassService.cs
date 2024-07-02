@@ -1,32 +1,35 @@
 ﻿using BusinessObjects.Entities;
+using Repositories.Implementation;
+using Repositories.Interface;
 using Services.Interface;
 
 namespace Services.Implementation;
 
-public class ClassService : IClassService
+public class ClassService(IClassRepository classRepository) : IClassService
 {
-    public Task<IEnumerable<Class>> GetAllClassesAsync()
+    public IClassRepository ClassRepository { get; set; } = classRepository;
+    public async Task<IEnumerable<Class?>?> GetAllClassesAsync()
     {
-        throw new NotImplementedException();
+        return await ClassRepository.GetAll();
     }
 
-    public Task<Class?> GetClassByIdAsync(int id)
+    public async Task<Class?> GetClassByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return await ClassRepository.GetById(id);
     }
 
-    public Task<int> AddClassAsync(Class @class)
+    public async Task<int> AddClassAsync(Class @class)
     {
-        throw new NotImplementedException();
+        return await ClassRepository.Create(@class);
     }
 
-    public Task<int> UpdateClassAsync(int id, Class @class)
+    public async Task<int> UpdateClassAsync(int id, Class @class)
     {
-        throw new NotImplementedException();
+        return await ClassRepository.Update(id, @class);
     }
 
-    public Task<int> DeleteClassAsync(int id)
+    public async Task<int> DeleteClassAsync(int id)
     {
-        throw new NotImplementedException();
+        return await ClassRepository.Delete(id);
     }
 }
