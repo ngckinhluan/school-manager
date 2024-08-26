@@ -1,0 +1,1 @@
+[![School Manager (CI / CD applied).](https://github.com/ngckinhluan/school-manager/actions/workflows/dotnet.yml/badge.svg?branch=main)](https://github.com/ngckinhluan/school-manager/actions/workflows/dotnet.yml)
