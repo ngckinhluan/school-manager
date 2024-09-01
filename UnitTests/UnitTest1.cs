@@ -1,4 +1,4 @@
-namespace SchoolManager.UnitTests;
+namespace UnitTests;
 
 [TestClass]
 public class UnitTest1

@@ -1,4 +1,4 @@
-namespace SchoolManager.API;
+namespace API;
 
 public class Program
 {
